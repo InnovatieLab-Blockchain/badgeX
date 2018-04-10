@@ -1,0 +1,26 @@
+{
+  "name": "hackathon-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "fetch": "^1.1.0",
+    "ipfs-api": "^20.0.0",
+    "react": "^16.3.1",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.3.1",
+    "react-icons": "^2.2.7",
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.4",
+    "reactstrap": "^5.0.0-beta.3",
+    "redux": "^3.7.2",
+    "redux-form": "^7.3.0",
+    "uport-connect": "^0.7.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

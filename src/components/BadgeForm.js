@@ -8,11 +8,13 @@ import * as AppActions from '../actions/AppActions'
 import {
   Button,
   Label,
-  Input
+  Input,
+  Table
 } from 'reactstrap';
 import checkAddressMNID from '../utilities/checkAddressMNID'
 import waitForMined from '../utilities/waitForMined'
 import CreatedBadgesContract from '../utilities/CreatedBadgesContract'
+
 
 class BadgeForm extends Component {
 
@@ -148,8 +150,28 @@ class BadgeForm extends Component {
               </Label>
               <input type='file' onChange={this.captureFile}/>
               <Button color='primary' onClick={this.addToIPFS}>Add to IPFS</Button>
-              {this.props.ipfsHash}
+
             </div>
+            <div>
+              <Table bordered>
+              <thead >
+                <th bgcolor='#428bca'><b class="text-white">Badge image</b></th>
+              </thead>
+                <tbody>
+                  <tr>
+                    <td><img src={"https:ipfs.io/ipfs/" + this.props.ipfsHash } style={{width: 150}} /></td>
+                    <td><a href={"https:ipfs.io/ipfs/" + this.props.ipfsHash }>link to ipfs</a></td>
+                  </tr>
+                  <tr>
+                    <td>Hash value</td>
+                    <td>{this.props.ipfsHash}</td>
+                  </tr>
+                </tbody>
+                </Table>
+              </div>
+
+
+
             <Button color='primary' size='lg' onClick={this.createBadge}>Submit</Button>
           </div>
         </div>

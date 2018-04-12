@@ -155,7 +155,7 @@ class BadgeForm extends Component {
             <div>
               <Table bordered>
               <thead >
-                <th bgcolor='#428bca'><b class="text-white">Badge image</b></th>
+                <th bgcolor='#007bff'><b class="text-white">Badge image</b></th>
               </thead>
                 <tbody>
                   <tr>

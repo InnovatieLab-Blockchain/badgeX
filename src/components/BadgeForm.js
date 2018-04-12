@@ -160,7 +160,7 @@ class BadgeForm extends Component {
                 <tbody>
                   <tr>
                     <td><img src={"https:ipfs.io/ipfs/" + this.props.ipfsHash } style={{width: 150}} /></td>
-                    <td><a href={"https:ipfs.io/ipfs/" + this.props.ipfsHash }>link to ipfs</a></td>
+                    <td><a href={"https:ipfs.io/ipfs/" + this.props.ipfsHash } target="_blank">link to ipfs</a></td>
                   </tr>
                   <tr>
                     <td>Hash value</td>

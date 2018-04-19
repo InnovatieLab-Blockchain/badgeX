@@ -6,6 +6,11 @@ import { bindActionCreators } from 'redux'
 import * as AppActions from '../actions/AppActions'
 import { uport } from '../utilities/uportSetup'
 
+import resolve from 'did-resolver'
+import registerResolver from 'uport-did-resolver'
+
+registerResolver()
+
 export class Home extends Component {
   constructor (props) {
     super(props)
@@ -28,6 +33,7 @@ export class Home extends Component {
       { requested: ['name', 'phone', 'country', 'avatar'],
       notifications: true }
     ).then((credentials) => {
+      resolve('did:uport:' + credentials.address + '/').then(doc => console.log(doc))
       this.props.actions.connectUport(credentials)
     })
   }

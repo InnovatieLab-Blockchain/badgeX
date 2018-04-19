@@ -2,6 +2,10 @@ import React from 'react'
 import { Credentials, SimpleSigner } from 'uport'
 import { uport } from '../utilities/uportSetup'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import resolve from 'did-resolver'
+import registerResolver from 'uport-did-resolver'
+
+registerResolver()
 
 class Badge extends React.Component {
   constructor (props) {
@@ -13,7 +17,8 @@ class Badge extends React.Component {
     this.state = {
       modal: false,
       modalName: '',
-      modalInfo: ''
+      modalInfo: '',
+      modalImg: '',
     }
   }
 
@@ -37,10 +42,10 @@ class Badge extends React.Component {
 
   getCredentials () {
     return new Credentials({
-      appName: 'Rabobank',
-      address: '2otfT9XykJx5HJEquMhg4WTeLNKkx8ZkjBE',
+      appName: 'Innovatielab Blockchain',
+      address: '2osVEge5GkpT3tJWdzr2TpfwdjsEo27MEoc',
       network: 'rinkeby',
-      signer: SimpleSigner('13b1ed7eb7d0af503dd5f9e292356d58ece0e50221c3ba65ec8ce4c5a3b99c51')
+      signer: SimpleSigner('497369198844fe973c9cadc8bdc5b0634fe01cd3ffe69944884cb6506c7f7be4')
     })
   }
 
@@ -54,62 +59,71 @@ class Badge extends React.Component {
     })
   }
 
-  verify () {
+  verify = async () => {
     let badge = this.props.badge
     let credentials = this.getCredentials()
+    const doc = await resolve('did:uport:' + credentials.settings.address + '/')
+    console.log(doc)
+    
     uport.requestCredentials({
-    verified: [badge[0]], notifications: true })
+    verified: [badge.name], notifications: true })
       .then((profile) => {
         credentials.lookup(profile.verified[0].iss).then(prof => {
+          console.log(prof)
           this.setState({
-              modalInfo: prof
+            modalInfo: prof.name,
+            modalImg: prof.image.contentUrl
           })
           this.toggle()
         })
-      })
+      }).catch((err) => {
+      console.log(err)
+    })
   }
 
   render () {
     return (
-        <tr>
-          <td>
-            <img
-              width='100px'
-              heigth='100px'
-              src={'https://ipfs.infura.io/ipfs/' + this.props.badge.ipfsHash}
-              alt='ipfs' />
-          </td>
-          <td>
-            {this.props.badge.name}
-          </td>
-          <td>
-            {this.props.badge.description}
-          </td>
-          <td>
-            <Button onClick={this.attest}>
-              Get Your Badge
-            </Button>
-          </td>
-          <td>
-            <Button onClick={this.verify}>
-              Verify Badge
-            </Button>
-          </td>
+      <tr>
         <td>
-
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>
-            Verify
-          </ModalHeader>
-          <ModalBody>
-            The Issuer is verified!
-          </ModalBody>
-          <ModalFooter>
-            <Button color='secondary' onClick={this.toggle}>
-              Ok
-            </Button>
-          </ModalFooter>
-        </Modal>
+          <img
+            width='150px'
+            heigth='150px'
+            src={'https://ipfs.infura.io/ipfs/' + this.props.badge.ipfsHash}
+            alt='ipfs' />
+        </td>
+        <td>
+          {this.props.badge.name}
+        </td>
+        <td>
+          {this.props.badge.description}
+        </td>
+        <td>
+          <Button onClick={this.attest}>
+            Get Your Badge
+          </Button>
+        </td>
+        <td>
+          <Button onClick={this.verify}>
+            Verify Badge
+          </Button>
+        </td>
+        <td>
+          <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+            <ModalHeader toggle={this.toggle}>
+              Verify
+            </ModalHeader>
+            <ModalBody>
+              <p>
+              The Issuer of this badge: <b>{this.state.modalInfo}</b>, is verified!<br/><br/>
+              <img src={'https://ipfs.infura.io' + this.state.modalImg} width='150px'/>
+              </p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color='secondary' onClick={this.toggle}>
+                Ok
+              </Button>
+            </ModalFooter>
+          </Modal>
         </td>
       </tr>
     )

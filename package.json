@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.0.0",
+    "did-resolver": "0.0.4",
     "fetch": "^1.1.0",
     "ipfs-api": "^20.0.0",
     "react": "^16.3.1",
@@ -15,7 +16,8 @@
     "reactstrap": "^5.0.0-beta.3",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
-    "uport-connect": "^0.7.1"
+    "uport-connect": "^0.7.1",
+    "uport-did-resolver": "0.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

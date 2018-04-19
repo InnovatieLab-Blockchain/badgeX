@@ -1,15 +1,11 @@
 // Frameworks
-import React, {Component } from 'react'
+import React, {Component} from 'react'
 import {uport} from '../utilities/uportSetup'
 import ipfs from '../utilities/ipfs';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as AppActions from '../actions/AppActions'
-import {
-  Button,
-  Label,
-  Input
-} from 'reactstrap';
+import {Button, Label, Input, Table} from 'reactstrap';
 import checkAddressMNID from '../utilities/checkAddressMNID'
 import waitForMined from '../utilities/waitForMined'
 import CreatedBadgesContract from '../utilities/CreatedBadgesContract'
@@ -117,7 +113,7 @@ class BadgeForm extends Component {
             <h4>Badge</h4>
             <form>
               <div class='mb-3'>
-              <Label for='name'>
+                <Label for='name'>
                   Name
                 </Label>
                 <Input
@@ -148,7 +144,26 @@ class BadgeForm extends Component {
               </Label>
               <input type='file' onChange={this.captureFile}/>
               <Button color='primary' onClick={this.addToIPFS}>Add to IPFS</Button>
-              {this.props.ipfsHash}
+            </div>
+            <div>
+              <Table bordered>
+                <tbody>
+                  <tr>
+                    <td>
+                      { this.props.ipfsHash ?
+                        <img src={"https:ipfs.io/ipfs/" + this.props.ipfsHash} width='150px'/> : null
+                      }
+                      </td>
+                    <td>
+                      <a href={"https:ipfs.io/ipfs/" + this.props.ipfsHash}>Link to IPFS</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Hash value</td>
+                    <td>{this.props.ipfsHash}</td>
+                  </tr>
+                </tbody>
+              </Table>
             </div>
             <Button color='primary' size='lg' onClick={this.createBadge}>Submit</Button>
           </div>

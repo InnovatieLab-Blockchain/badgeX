@@ -1,8 +1,9 @@
 import { web3 } from './uportSetup'
 
 const abi = require('../contracts/hackathon/build/contracts/CreatedBadges.json').abi
-//const contractAddress = '0x580300be9933914d86347ede269d1acd1dffa5d6'
-const contractAddress = '0x6bdbb74a3e33c7f75e62dc4c37917a2bd5b150c3'
+// const contractAddress = '0x580300be9933914d86347ede269d1acd1dffa5d6'
+// const contractAddress = '0x6bdbb74a3e33c7f75e62dc4c37917a2bd5b150c3'
+const contractAddress = '0xd34d5e0bcb32c2bee2289cda566c34608e36e442'
 
 function CreatedBadgesContractSetup () {
   let CreatedBadgesABI = web3.eth.contract(abi)

@@ -10,6 +10,7 @@ import checkAddressMNID from '../utilities/checkAddressMNID'
 import waitForMined from '../utilities/waitForMined'
 import CreatedBadgesContract from '../utilities/CreatedBadgesContract'
 
+
 class BadgeForm extends Component {
 
   constructor(props) {
@@ -147,24 +148,24 @@ class BadgeForm extends Component {
             </div>
             <div>
               <Table bordered>
+              <thead >
+                <th bgcolor='#007bff'><b class="text-white">Badge image</b></th>
+              </thead>
                 <tbody>
                   <tr>
-                    <td>
-                      { this.props.ipfsHash ?
-                        <img src={"https:ipfs.io/ipfs/" + this.props.ipfsHash} width='150px'/> : null
-                      }
-                      </td>
-                    <td>
-                      <a href={"https:ipfs.io/ipfs/" + this.props.ipfsHash}>Link to IPFS</a>
-                    </td>
+                    <td><img src={"https:ipfs.io/ipfs/" + this.props.ipfsHash } style={{width: 150}} /></td>
+                    <td><a href={"https:ipfs.io/ipfs/" + this.props.ipfsHash } target="_blank">link to ipfs</a></td>
                   </tr>
                   <tr>
                     <td>Hash value</td>
                     <td>{this.props.ipfsHash}</td>
                   </tr>
                 </tbody>
-              </Table>
-            </div>
+                </Table>
+              </div>
+
+
+
             <Button color='primary' size='lg' onClick={this.createBadge}>Submit</Button>
           </div>
         </div>
